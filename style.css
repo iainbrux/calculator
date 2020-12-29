@@ -1,0 +1,119 @@
+.container {
+    min-height: 580px;
+    min-width: 480px;
+    max-width: 640px;
+    max-height: 640px;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: space-around;
+    border-radius: 5px;
+}
+
+.buttons {
+    flex-basis: auto;
+    flex-grow: 3;
+    margin: 2%;
+    border: 3px solid grey;
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
+    justify-content: space-around;
+    border-radius: 5px;
+}
+
+.display {
+    flex-basis: auto;
+    flex-grow: 1;
+    display: flex;
+    border: 2px solid black;
+    border-radius: 5px;
+    min-height: 100px;
+    size: auto;
+    margin: 2%;
+}
+
+.row1,
+.row2,
+.row3,
+.row4,
+.row5 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+input {
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 0.1s;
+    background-color: white;
+}
+
+input[type="button"]:before {
+    content: "";
+    border-radius: 50%;
+    background-color: white;
+    transition-duration: 0.4s;
+}
+
+input[type="button"]:hover {
+    background-color: black;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+input[type="button"]:focus {
+    outline: none;
+}
+
+input[type="button"]:active {
+    transform: translateY(1px);
+}
+
+.row1 {
+    margin-top: 2%;
+}
+
+.row5 {
+    margin-bottom: 2%;
+}
+
+
+
+#cancel-entry,
+#exponent,
+#factorial,
+#backspace,
+#seven,
+#eight,
+#nine,
+#divide,
+#four,
+#five,
+#six,
+#multiply,
+#one,
+#two,
+#three,
+#minus,
+#decimal,
+#zero,
+#equals,
+#add {
+    width: 18%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    margin: 2%;
+}
