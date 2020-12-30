@@ -26,10 +26,11 @@
 .display {
     display: flex;
     flex-grow: 1;
-    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
     border: 2px solid black;
     border-radius: 5px;
-    min-height: 100px;
+    min-height: 180px;
     size: auto;
     margin: 2%;
 }
@@ -40,6 +41,22 @@
     margin: 2%;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 50px;
+}
+
+.operator-display {
+    display: flex;
+    align-items: center;
+    margin: 2%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+}
+
+.past-display {
+    display: flex;
+    align-items: center;
+    margin: 2%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
 }
 
 .row1,
