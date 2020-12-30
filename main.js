@@ -1,30 +1,31 @@
+//Variables
+
 let display = document.querySelector('.numbers-display');
-const seven = document.querySelector('#seven');
-const eight = document.querySelector('#eight');
-const nine = document.querySelector('#nine');
-const divide = document.querySelector('#divide');
+let getInputValue;
+let getInputFunction;
+
+const limit = 999999999999999;
 const clearEntry = document.querySelector('#cancel-entry');
+const numbers = document.querySelectorAll('.number');
+const functions = document.querySelectorAll('.function');
 
-seven.addEventListener('click', () => {
-    display.innerText <= 99999999999999 ? display.innerText = display.innerText + '7' : display.innerText + "";
+//Events
+
+numbers.forEach(number => {
+    number.addEventListener('click', () => {
+        display.innerText < limit ? display.innerText = display.innerText + number.value : display.innerText + "";
+        getInputValue = display.innerText;
+    });
+})
+
+functions.forEach(operation => {
+    operation.addEventListener('click', () => {
+        getInputFunction = operation.value;
+    });
 });
 
-eight.addEventListener('click', () => {
-    display.innerText <= 99999999999999 ? display.innerText = display.innerText + '8' : display.innerText + "";
-});
-
-nine.addEventListener('click', () => {
-    display.innerText <= 99999999999999 ? display.innerText = display.innerText + '9' : display.innerText + "";
-});
+// calculations();
 
 clearEntry.addEventListener('click', () => {
     display.innerText = "";
 });
-
-/* Look at shortening code snippet above to one function
-
-Think something like, keys.addEventListener('click', () => {
-    display.innerText = display.innerText + keys.value;
-})
-
-*/
