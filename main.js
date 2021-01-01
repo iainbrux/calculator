@@ -25,11 +25,10 @@ const backspace = document.querySelector('#backspace');
 clearDisplays = () => {
     pastDisplay.innerText = "";
     operatorDisplay.innerText = "";
-    decimalSign.disabled = false;
 }
 
 divideByZero = () => {
-    if (operatorDisplay.innerText === '/' && display.innerText === '0') {
+    if (operatorDisplay.innerText === '÷' && display.innerText === '0') {
         clearDisplays();
         display.innerText = "Cannot divide by zero. Result: Infinity! (sqRT -1)"
     }
@@ -74,14 +73,22 @@ calculate = () => {
 
 numbers.forEach(number => {
     number.addEventListener('click', () => {
-        if (display.innerText.length > 15) {
-            display.innerText = display.innerText.substring(0, 15);
-        }
         display.innerText = display.innerText + number.value;
         getInputValue = display.innerText;
         display.innerText.includes(getInputFunction) ? (operatorDisplay.innerText = getInputFunction, display.innerText = number.value) : display.innerText + "";
-    });
+        if (display.innerText.length >= 12) {
+            display.innerText = display.innerText.substring(0, 12);
+            getInputValue = display.innerText.substring(0, 12);
+        }
+    })
 })
+
+window.addEventListener('keydown', (e) => {
+    let keyValue = document.querySelector(`input[data-key="${e.key}"]`);
+    if(keyValue !== null) {
+        keyValue.click();
+    }
+});
 
 functions.forEach(operation => {
     operation.addEventListener('click', () => {
@@ -96,7 +103,6 @@ functions.forEach(operation => {
 });
 
 decimalSign.addEventListener('click', () => {
-    display.innerText;
     decimalSign.disabled = true;
 });
 
@@ -107,14 +113,17 @@ factorialSign.addEventListener('click', () => {
 
 clearEntry.addEventListener('click', () => {
     display.innerText = "";
+    decimalSign.disabled = false;
     clearDisplays();
 });
 
 equalsSign.addEventListener('click', () => {
     calculate();
+    decimalSign.disabled = true;
 });
 
 backspace.addEventListener('click', () => {
     let displayLength = display.innerText.length;
     display.innerText = display.innerText.substring(0, displayLength - 1);
+    getInputValue = display.innerText;
 });
