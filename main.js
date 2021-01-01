@@ -8,7 +8,7 @@ let displayValue = display.innerText;
 let pastDisplayValue = pastDisplay.innerText;
 let operatorDisplayValue = operatorDisplay.innerText;
 let heldValue;
-let getInputValue;
+let getInputValue = "";
 let getInputFunction;
 let calculatedValue;
 
@@ -85,21 +85,31 @@ numbers.forEach(number => {
 
 window.addEventListener('keydown', (e) => {
     let keyValue = document.querySelector(`input[data-key="${e.key}"]`);
-    if(keyValue !== null) {
-        keyValue.click();
+    if (keyValue !== null) {
+        keyValue.classList.add('active');
+    }
+    (keyValue !== null) ? keyValue.click() : (e.key === "=") ? (keyValue = document.querySelector(`input[data-key="Enter"]`), keyValue.click()) : e.preventDefault();
+});
+
+window.addEventListener('keyup', (e) => {
+    let keyValue = document.querySelector(`input[data-key="${e.key}"]`);
+    if (keyValue !== null) {
+        keyValue.classList.remove('active');
     }
 });
 
 functions.forEach(operation => {
-    operation.addEventListener('click', () => {
-        isAlreadyPopulated();
-        display.innerText = "";
-        getInputFunction = operation.value;
-        heldValue = getInputValue
-        pastDisplay.innerText = heldValue;
-        operatorDisplay.innerText = getInputFunction;
-        decimalSign.disabled = false;
-    });
+    if (display.innerText !== undefined) {
+        operation.addEventListener('click', () => {
+            isAlreadyPopulated();
+            display.innerText = "";
+            getInputFunction = operation.value;
+            heldValue = getInputValue
+            pastDisplay.innerText = heldValue;
+            operatorDisplay.innerText = getInputFunction;
+            decimalSign.disabled = false;
+        });
+    }
 });
 
 decimalSign.addEventListener('click', () => {
@@ -113,16 +123,18 @@ factorialSign.addEventListener('click', () => {
 
 clearEntry.addEventListener('click', () => {
     display.innerText = "";
+    getInputValue = "";
     decimalSign.disabled = false;
     clearDisplays();
 });
 
 equalsSign.addEventListener('click', () => {
     calculate();
-    decimalSign.disabled = true;
+    (!display.innerText.includes('.')) ? decimalSign.disabled = false : decimalSign.disabled = true;
 });
 
 backspace.addEventListener('click', () => {
+    (!display.innerText.includes('.')) ? decimalSign.disabled = false : decimalSign.disabled = true;
     let displayLength = display.innerText.length;
     display.innerText = display.innerText.substring(0, displayLength - 1);
     getInputValue = display.innerText;
