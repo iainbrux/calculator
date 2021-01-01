@@ -4,6 +4,9 @@ let display = document.querySelector('.numbers-display');
 let pastDisplay = document.querySelector('.past-display');
 let operatorDisplay = document.querySelector('.operator-display');
 let currentNumber = display.innerText;
+let displayValue = display.innerText;
+let pastDisplayValue = pastDisplay.innerText;
+let operatorDisplayValue = operatorDisplay.innerText;
 let getInputValue;
 let getInputFunction;
 let calculatedValue;
@@ -45,14 +48,11 @@ factorial = number => {
 }
 
 isAlreadyPopulated = () => {
-    if (pastDisplay.innerText.includes(getInputValue) && operatorDisplay.innerText.includes(getInputFunction)) {
-        if (getInputFunction === "+") {
-            //pastDisplay.innerText = getInputValue;
-            //operatorDisplay.innerText = getInputFunction;
-            pastDisplay.innerText = Number(getInputValue) + Number(display.innerText.value);
-            console.log(Number(getInputValue) + Number(display.innerText));
-        }
-    }
+    // if (pastDisplay.innerText.includes(getInputValue) && operatorDisplay.innerText.includes(getInputFunction) && displayValue.includes('string')) {
+    //     if (getInputFunction === "+") {
+    //         console.log(displayValue);
+    //     }
+    // }
 }
 
 calculate = () => {
@@ -87,7 +87,7 @@ functions.forEach(operation => {
         getInputFunction = operation.value;
         pastDisplay.innerText = getInputValue;
         operatorDisplay.innerText = getInputFunction;
-        //isAlreadyPopulated()
+        isAlreadyPopulated();
         decimalSign.disabled = false;
     });
 });
