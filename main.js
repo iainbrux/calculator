@@ -22,19 +22,19 @@ const backspace = document.querySelector('#backspace');
 
 //Functions
 
-clearDisplays = () => {
+const clearDisplays = () => {
     pastDisplay.innerText = "";
     operatorDisplay.innerText = "";
 }
 
-divideByZero = () => {
+const divideByZero = () => {
     if (operatorDisplay.innerText === '÷' && display.innerText === '0') {
         clearDisplays();
-        display.innerText = "Cannot divide by zero. Result: Infinity! (sqRT -1)"
+        display.innerText = "Error: Cannot divide by zero."
     }
 }
 
-factorial = number => {
+const factorial = number => {
 	let answer = 1;
 	if (number == 0 || number == 1) {
 		return answer;
@@ -47,26 +47,39 @@ factorial = number => {
 	}
 }
 
-isAlreadyPopulated = () => {
-    if (pastDisplay.innerText.includes(heldValue) && operatorDisplay.innerText.includes(getInputFunction) && display.innerText.includes(getInputValue)) {
+const isAlreadyPopulated = () => {
+    if (pastDisplay.innerText.includes(heldValue) 
+        && operatorDisplay.innerText.includes(getInputFunction) 
+        && display.innerText.includes(getInputValue)) {
         calculate();
     }
 }
 
-calculate = () => {
-    operatorDisplay.innerText === "+" ? 
-        (display.innerText = Number(pastDisplay.innerText) + Number(display.innerText), clearDisplays(), getInputValue = display.innerText) :
-    operatorDisplay.innerText === "-" ? 
-        (display.innerText = Number(pastDisplay.innerText) - Number(display.innerText), clearDisplays(), getInputValue = display.innerText) :
-    operatorDisplay.innerText === "×" ? 
-        (display.innerText = Number(pastDisplay.innerText) * Number(display.innerText), clearDisplays(), getInputValue = display.innerText) :
-    operatorDisplay.innerText === "e˟" ? 
-        (display.innerText = Number(pastDisplay.innerText) ** Number(display.innerText), clearDisplays(), getInputValue = display.innerText) :
-    operatorDisplay.innerText === "÷" && display.innerText === "0" ? 
-        divideByZero() : 
-    operatorDisplay.innerText === "÷" && display.innerText !== "0" ? 
-        (display.innerText = Number(pastDisplay.innerText) / Number(display.innerText), clearDisplays(), getInputValue = display.innerText) :
-        display.innerText;
+const calculate = () => { //could be converted into a switch statement?
+    operatorDisplay.innerText === "+" 
+    ? (display.innerText = +pastDisplay.innerText + +display.innerText, clearDisplays(), getInputValue = display.innerText) 
+    : operatorDisplay.innerText === "-" 
+    ? (display.innerText = +pastDisplay.innerText - +display.innerText, clearDisplays(), getInputValue = display.innerText) 
+    : operatorDisplay.innerText === "×" 
+    ? (display.innerText = +pastDisplay.innerText * +display.innerText, clearDisplays(), getInputValue = display.innerText) 
+    : operatorDisplay.innerText === "e˟" 
+    ? (display.innerText = Number(pastDisplay.innerText) ** +display.innerText, clearDisplays(), getInputValue = display.innerText) //had to use Number() because can't use +var in exponential expression?
+    : operatorDisplay.innerText === "÷" && display.innerText === "0" 
+    ? divideByZero() 
+    : operatorDisplay.innerText === "÷" && display.innerText !== "0" 
+    ? (display.innerText = +pastDisplay.innerText / +display.innerText, clearDisplays(), getInputValue = display.innerText) 
+    : display.innerText;
+
+    /* 
+    switch (operatorDisplay.innerText) {
+        case "+":
+            do function(operator)
+            break;
+        default:
+            println('This is pseudocode')
+    }
+
+    */
 }
 
 //Events
@@ -88,7 +101,11 @@ window.addEventListener('keydown', (e) => {
     if (keyValue !== null) {
         keyValue.classList.add('active');
     }
-    (keyValue !== null) ? keyValue.click() : (e.key === "=") ? (keyValue = document.querySelector(`input[data-key="Enter"]`), keyValue.click()) : e.preventDefault();
+    (keyValue !== null) 
+    ? keyValue.click() 
+    : (e.key === "=") 
+    ? (keyValue = document.querySelector(`input[data-key="Enter"]`), keyValue.click()) 
+    : e.preventDefault();
 });
 
 window.addEventListener('keyup', (e) => {
@@ -117,7 +134,7 @@ decimalSign.addEventListener('click', () => {
 });
 
 factorialSign.addEventListener('click', () => {
-    getInputValue = Number(display.innerText);
+    getInputValue = +display.innerText;
     factorial(getInputValue);
 });
 
